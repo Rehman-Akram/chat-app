@@ -19,9 +19,6 @@ export class Role extends Document {
 
   @Prop({ type: [{ type: MongooseSchema.Types.String, ref: 'User' }] })
   users: MongooseSchema.Types.String[];
-
-  @Prop({ type: MongooseSchema.Types.String, ref: 'Permission' })
-  permission: MongooseSchema.Types.String;
 }
 
 export const RoleSchema = SchemaFactory.createForClass(Role);
