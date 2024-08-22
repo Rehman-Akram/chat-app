@@ -14,6 +14,7 @@ import {
   UnauthorizedExceptionFilter,
 } from './shared/exceptions';
 import { APP_FILTER } from '@nestjs/core';
+import { RolesModule } from './roles/roles.module';
 
 const globalFilters = [
   ConflictExceptionFilter,
@@ -44,6 +45,7 @@ const globalFilters = [
     AppModule,
     UsersModule,
     SharedModule,
+    RolesModule,
   ],
   controllers: [AppController],
   providers: [AppService, ...globalFilters],
