@@ -1,4 +1,4 @@
-import { DEFAULT_ROLES } from 'src/shared/constants/constants';
+import { DEFAULT_ROLES } from '../../shared/constants/constants';
 import { UserGender } from '../enums/gender.enum';
 import { UserStatus } from '../enums/status.enum';
 export const usersData = [
