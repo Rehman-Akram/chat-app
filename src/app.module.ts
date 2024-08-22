@@ -15,6 +15,8 @@ import {
 } from './shared/exceptions';
 import { APP_FILTER } from '@nestjs/core';
 import { RolesModule } from './roles/roles.module';
+import { AuthModule } from './auth/auth.module';
+import { JwtAuthGuard } from './auth/guards/jwt.guard';
 
 const globalFilters = [
   ConflictExceptionFilter,
@@ -46,8 +48,16 @@ const globalFilters = [
     UsersModule,
     SharedModule,
     RolesModule,
+    AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService, ...globalFilters],
+  providers: [
+    AppService,
+    ...globalFilters,
+    {
+      provide: APP_FILTER,
+      useClass: JwtAuthGuard,
+    },
+  ],
 })
 export class AppModule {}
