@@ -17,8 +17,8 @@ export class Role extends Document {
   @Prop({ type: Date })
   updatedAt: Date;
 
-  @Prop({ type: [{ type: MongooseSchema.Types.String, ref: 'User' }] })
-  users: MongooseSchema.Types.String[];
+  @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'User' }] })
+  users: MongooseSchema.Types.ObjectId[];
 }
 
 export const RoleSchema = SchemaFactory.createForClass(Role);

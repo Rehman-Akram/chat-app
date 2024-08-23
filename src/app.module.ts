@@ -17,6 +17,7 @@ import { APP_FILTER, APP_GUARD } from '@nestjs/core';
 import { RolesModule } from './roles/roles.module';
 import { AuthModule } from './auth/auth.module';
 import { JwtAuthGuard } from './auth/guards/jwt.guard';
+import { ChatMessagesModule } from './chat-messages/chat-messages.module';
 
 const globalFilters = [
   ConflictExceptionFilter,
@@ -49,6 +50,7 @@ const globalFilters = [
     SharedModule,
     RolesModule,
     AuthModule,
+    ChatMessagesModule,
   ],
   controllers: [AppController],
   providers: [

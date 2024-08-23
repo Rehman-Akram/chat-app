@@ -22,6 +22,9 @@ export class User extends Document {
   @Prop({ type: Date })
   updatedAt: Date;
 
+  @Prop({ type: Date })
+  lastActive: Date;
+
   @Prop({
     enum: UserStatus,
     required: true,
@@ -45,8 +48,12 @@ export class User extends Document {
   phoneVerified: boolean;
 
   @ApiProperty({ type: [String] })
-  @Prop({ type: [{ type: MongooseSchema.Types.String, ref: 'Role' }] })
-  roles: MongooseSchema.Types.String[];
+  @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Role' }] })
+  roles: MongooseSchema.Types.ObjectId[];
+
+  @ApiProperty({ type: [String] })
+  @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'User' }] })
+  contacts: MongooseSchema.Types.ObjectId[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
