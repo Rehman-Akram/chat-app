@@ -16,7 +16,7 @@ async function bootstrap() {
       .setTitle('Chat App Apis')
       .setDescription('Apis for chat app')
       .setVersion('1.0')
-      .addTag('Chat App')
+      .addTag('Chat App Swagger Documentation')
       .addBearerAuth()
       .build();
 
