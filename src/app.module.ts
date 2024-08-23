@@ -13,7 +13,7 @@ import {
   PasswordMismatchExceptionFilter,
   UnauthorizedExceptionFilter,
 } from './shared/exceptions';
-import { APP_FILTER } from '@nestjs/core';
+import { APP_FILTER, APP_GUARD } from '@nestjs/core';
 import { RolesModule } from './roles/roles.module';
 import { AuthModule } from './auth/auth.module';
 import { JwtAuthGuard } from './auth/guards/jwt.guard';
@@ -52,12 +52,12 @@ const globalFilters = [
   ],
   controllers: [AppController],
   providers: [
-    AppService,
-    ...globalFilters,
     {
-      provide: APP_FILTER,
+      provide: APP_GUARD,
       useClass: JwtAuthGuard,
     },
+    AppService,
+    ...globalFilters,
   ],
 })
 export class AppModule {}

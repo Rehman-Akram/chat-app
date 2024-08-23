@@ -31,6 +31,7 @@ export class UsersService {
           })
           .populate({
             path: 'roles',
+            select: '-users',
           })
           .exec()
       ).toObject();
@@ -61,6 +62,7 @@ export class UsersService {
         .findOne({ email, status: UserStatus.ACTIVE })
         .populate({
           path: 'roles',
+          select: '-users',
         });
       if (isPasswordRequired) {
         query.select('+password');
