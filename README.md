@@ -18,8 +18,8 @@ This backend application provides
 In process... Please wait while dev completed. 
 
 1. Authentication (developed)
-2. Sign Up / login (In process)
-3. Real time chat between users (TODO)
+2. Sign Up / login / whoami (developed)
+3. Real time chat between users (In process)
 4. Group creation (TODO)
 5. Real time chat in groups (TODO)
 6. Group admin features (TODO)
