@@ -4,11 +4,16 @@ import { User } from './schemas/user.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { UserStatus } from './enums/status.enum';
 import { ERRORS } from '../shared/constants/constants';
-import { NotFoundError } from '../shared/errors';
+import { ConflictError, NotFoundError } from '../shared/errors';
+import { CreateUserDto } from '../auth/dto/create-user.dto';
+import { RolesService } from '../roles/roles.service';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel(User.name) private userModel: Model<User>) {}
+  constructor(
+    @InjectModel(User.name) private userModel: Model<User>,
+    private roleService: RolesService,
+  ) {}
 
   /**
    * This function is used to find user by means of _id which is not active
@@ -60,7 +65,10 @@ export class UsersService {
       if (isPasswordRequired) {
         query.select('+password');
       }
-      const user = (await query.exec()).toObject();
+      const user = await query.exec();
+      if (user) {
+        return user.toObject();
+      }
       return user;
     } catch (error) {
       Logger.error(
@@ -70,6 +78,33 @@ export class UsersService {
             isPasswordRequired,
           },
         )}`,
+      );
+      throw error;
+    }
+  }
+
+  async createUser(createUserDto: CreateUserDto, role: string): Promise<User> {
+    try {
+      // check if user already exist or not
+      const userFetched = await this.findUserByEmail(createUserDto.email);
+      if (userFetched) {
+        throw new ConflictError(ERRORS.USER_ALREADY_EXISTS);
+      }
+      // fetch role
+      const roleFetched = await this.roleService.findRoleByName(role);
+      if (!roleFetched) {
+        throw new NotFoundError(ERRORS.ROLE_NOT_FOUND);
+      }
+      const user = await this.userModel.create({
+        ...createUserDto,
+        roles: [roleFetched._id],
+      });
+      const userObj = user.toObject();
+      delete userObj.password;
+      return userObj;
+    } catch (error) {
+      Logger.error(
+        `Error in createUser of user service where createUserDto: ${JSON.stringify(createUserDto)}`,
       );
       throw error;
     }

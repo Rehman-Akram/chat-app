@@ -3,6 +3,7 @@ import { Document, Schema as MongooseSchema, UpdateQuery } from 'mongoose';
 import { UserStatus } from '../enums/status.enum';
 import { UserGender } from '../enums/gender.enum';
 import { Utils } from '../../shared/utils/utils';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Schema({ timestamps: true })
 export class User extends Document {
@@ -43,6 +44,7 @@ export class User extends Document {
   @Prop({ default: false, required: true })
   phoneVerified: boolean;
 
+  @ApiProperty({ type: [String] })
   @Prop({ type: [{ type: MongooseSchema.Types.String, ref: 'Role' }] })
   roles: MongooseSchema.Types.String[];
 }

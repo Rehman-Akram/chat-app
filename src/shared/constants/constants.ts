@@ -9,6 +9,7 @@ export const ERRORS = {
   BAD_REQUEST: 'Bad request',
   UN_AUTHORIZED: 'You are un authorized to perform this action',
   TOKEN_NOT_FOUND: 'Token not found',
+  ROLE_NOT_FOUND: 'Role not found',
   USER_NOT_FOUND: 'User not found',
   USER_ALREADY_EXISTS:
     'User already Exists with same phone number or email address',
