@@ -1,4 +1,4 @@
-import { Prop, Schema } from '@nestjs/mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
 
 @Schema({ timestamps: true })
@@ -21,3 +21,5 @@ export class ChatRoom extends Document {
   @Prop({ type: Date })
   updatedAt: Date;
 }
+
+export const ChatRoomSchema = SchemaFactory.createForClass(ChatRoom);

@@ -1,4 +1,4 @@
-import { Prop, Schema } from '@nestjs/mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
 import { ApiProperty } from '@nestjs/swagger';
 import { MessageEnum } from '../enums/message.enum';
@@ -7,10 +7,11 @@ import { MessageEnum } from '../enums/message.enum';
 export class ChatMessage extends Document {
   @ApiProperty({ type: String })
   @Prop({
-    type: { type: MongooseSchema.Types.ObjectId, ref: 'User' },
+    type: MongooseSchema.Types.ObjectId,
+    ref: 'User',
     required: true,
   })
-  sender: MongooseSchema.Types.String;
+  sender: MongooseSchema.Types.ObjectId;
 
   @Prop({ required: true })
   content: string;
@@ -34,3 +35,5 @@ export class ChatMessage extends Document {
   @Prop({ type: Date })
   updatedAt: Date;
 }
+
+export const ChatMessageSchema = SchemaFactory.createForClass(ChatMessage);
