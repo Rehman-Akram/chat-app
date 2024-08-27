@@ -28,7 +28,7 @@ export class User extends Document {
   @Prop({
     enum: UserStatus,
     required: true,
-    default: UserStatus.ACTIVE,
+    default: UserStatus.PENDING,
   })
   status: UserStatus;
 

@@ -21,6 +21,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         if (tokenFromCookies) {
           return tokenFromCookies;
         }
+        // Check token in query param
+        const tokenInQuery = req.query.token;
+        if (tokenInQuery) {
+          return tokenInQuery;
+        }
         // If not found in cookies, extract from the Authorization header
         return ExtractJwt.fromAuthHeaderAsBearerToken()(req);
       },

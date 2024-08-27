@@ -54,4 +54,32 @@ export class Utils {
     }
     return obj;
   }
+
+  public static generatePassword(length: number): string {
+    const lowercase = 'abcdefghijklmnopqrstuvwxyz';
+    const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const digits = '0123456789';
+    const specialChars = '@$!%*?&';
+
+    // Ensure the password includes at least one character from each required set
+    let password = '';
+    password += lowercase[Math.floor(Math.random() * lowercase.length)];
+    password += uppercase[Math.floor(Math.random() * uppercase.length)];
+    password += digits[Math.floor(Math.random() * digits.length)];
+    password += specialChars[Math.floor(Math.random() * specialChars.length)];
+
+    // Fill the rest of the password with random characters from all sets
+    const allChars = lowercase + uppercase + digits + specialChars;
+    for (let i = password.length; i < length; i++) {
+      password += allChars[Math.floor(Math.random() * allChars.length)];
+    }
+
+    // Shuffle the password to ensure the characters are in random order
+    password = password
+      .split('')
+      .sort(() => 0.5 - Math.random())
+      .join('');
+
+    return password;
+  }
 }
