@@ -48,3 +48,9 @@ For authentication JWT is used with passport strategy
 
 ## APi-Documentation
 Swagger documentation, accessible via {baseurl}/api-documentation e.g. http://localhost:3000/api-documentation
+
+## Detailed Documentation
+
+One can find detailed documentation at following link
+
+https://docs.google.com/document/d/1rVLzX-lWyAvK1vQFYC5OJjm-I_m63QlvYFu70oKEHAk/edit?usp=sharing
